@@ -1,56 +1,26 @@
 import React, { Component } from 'react';
-import ScrollToTop from 'react-scroll-up';
+import { connect } from 'react-refetch';
+import PropTypes from 'prop-types';
 
-import Search from 'components/search/search';
-import Table from 'components/table/table';
-import data from 'data';
+import Error from 'components/error/error';
+import Home from 'components/home/home';
 
 class Homepage extends Component {
-  constructor (props) {
-    super(props);
-    
-    this.state = {
-      searchFieldValue: ''
-    };
-    
-    this.searchValueEntered = this.searchValueEntered.bind(this);
-  }
-  
-  searchValueEntered (value) {
-    this.setState({
-      searchFieldValue: value
-    });
-  }
-  
-  render () {  
-    return (
-      <div className="container-fluid">
-        <div className="row mb-3">
-          <div className="col">
-            <h1>Contact your NZ MP</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <Search searchValueEntered={this.searchValueEntered} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <Table mpData={data} searchFieldValue={this.state.searchFieldValue} />
-          </div>
-        </div>
-        <div className="row mt-3">
-          <div className="col col-md-6">
-            <small className="font-italic">Source: Office of the Clerk/Parliamentary Service. Licensed by the Clerk of the House of Representatives and/or the Parliamentary Corporation on behalf of Parliamentary Service for re-use under the Creative Commons Attribution 4.0 International licence. Full licence available at <a href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a>. Data last updated <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">5th April 2018.</a></small>
-          </div>
-        </div>
-        <ScrollToTop showUnder={160}>
-          <button className="btn btn-primary">Back to top</button>
-        </ScrollToTop>
-      </div>
-    );
+  render () {
+    if (this.props.data.pending) {
+      return <div>Loading...</div>;
+    } else if (this.props.data.rejected) {
+      return <Error error={this.props.data.reason}/>;
+    } else if (this.props.data.fulfilled) {
+      return <Home data={this.props.data.value}/>;
+    }
   }
 }
 
-export default Homepage;
+Homepage.propTypes = {
+  data: PropTypes.object
+};
+
+export default connect(() => ({
+  data: 'https://51d104d3-f066-4c11-b8bd-a317ef5e448a.mock.pstmn.io/mp-data'
+}))(Homepage);

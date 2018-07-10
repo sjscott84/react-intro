@@ -33,7 +33,7 @@ A common stack is:
 Today we'll be covering the first three of those, by building a simple app which
 displays a searchable list of MP's in New Zealand, and their email addresses.
 
-## Getting started 
+## Getting started
 
 If you have your own github account already, you might prefer to fork this
 repository and clone that instead. If you don't just run the following commands
@@ -41,7 +41,7 @@ on a terminal or command line interface (assuming that your machine already has
 [git available](https://git-scm.com/downloads)):
 
 ```
-git clone https://github.com/jenofdoom/react-intro.git
+git clone https://github.com/sjscott84/react-intro.git
 cd react-intro
 ```
 
@@ -149,7 +149,7 @@ import data from 'data';
 We can check that's working as we expect by adding a `console.log(data);`
 statement temporarily.
 
-We also want to import the new component that we're adding, for the table. 
+We also want to import the new component that we're adding, for the table.
 
 > It's a good idea to only have one component per file, so we should create a new file.
 
@@ -226,7 +226,7 @@ structure more easily.
 ### PropTypes
 
 React comes with a rudimentary type checking system that is good to use, called
-[PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html). 
+[PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html).
 
 PropTypes are added to every component and they validate that __props__ that are
 being passed in conform to a particular _type_ (like, a string, or an array).
@@ -246,7 +246,7 @@ import React, { Component } from 'react';
 
 to:
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 ```
 
@@ -267,9 +267,9 @@ Rendering variables into JSX is really easy, let's temporarily try it now:
 
 ```
 render () {
-  
+
   let test = 'MP';
-  
+
   return (
     <table className="table">
       <thead>
@@ -287,7 +287,7 @@ use a loop:
 ```
 render () {
   let rows = [];
-  
+
   this.props.mpData.forEach(mp => {
     rows.push(
       <tr>
@@ -298,7 +298,7 @@ render () {
       </tr>
     );
   });
-  
+
   return (
 ```
 
@@ -338,7 +338,7 @@ We can use normal JS to perform transformations on the data.
 this.props.mpData.forEach((mp, index) => {
   let name = mp.name.split(',');
   name = name.reverse().join(' ');
-  
+
   rows.push(  
     <tr key={index}>
       <td>{name}</td>
@@ -356,7 +356,7 @@ this.props.mpData.forEach((mp, index) => {
 this.props.mpData.forEach(mp => {
   let name = mp.name.split(',');
   name = name.reverse().join(' ');
-  
+
   rows.push(  
     <tr key={mp.email}>
       <td>{name}</td>
@@ -377,11 +377,11 @@ We're going to change the current code:
 class Table extends Component {
   render () {
     let rows = [];
-    
+
     this.props.mpData.forEach((mp, index) => {
       let name = mp.name.split(',');
       name = name.reverse().join(' ');
-      
+
       rows.push(  
         <tr key={index}>
           <td>{name}</td>
@@ -391,7 +391,7 @@ class Table extends Component {
         </tr>
       );
     });
-    
+
     return (
 ```
 
@@ -401,11 +401,11 @@ to:
 class Table extends Component {
   renderRows () {
     let rows = [];
-    
+
     this.props.mpData.forEach((mp, index) => {
       let name = mp.name.split(',');
       name = name.reverse().join(' ');
-      
+
       rows.push(  
         <tr key={index}>
           <td>{name}</td>
@@ -415,13 +415,13 @@ class Table extends Component {
         </tr>
       );
     });
-    
+
     return rows;
   }
-  
+
   render () {
     const rows = this.renderRows();
-    
+
     return (
 ```
 
@@ -437,11 +437,11 @@ class Search extends Component {
     return (
       <div className="mb-3">
         <label>
-          Search: 
+          Search:
           <input
             className="ml-2"
             type="search"
-            autoComplete="off" 
+            autoComplete="off"
           />
         </label>
       </div>
@@ -492,12 +492,12 @@ import React, { Component } from 'react';
 class Search extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
   }
-  
+
   render () {  
     return (
       <div className="mb-3">
@@ -514,7 +514,7 @@ class Search extends Component {
 
 The `constructor (props) { super(props)` bit is boilerplate for adding a
 constructor to a class.
-  
+
 Now we need to set up a trigger so as the user interacts
 with the field their input values are reflected in the state:
 
@@ -522,20 +522,20 @@ with the field their input values are reflected in the state:
 class Search extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
 
     this.searchFieldChange = this.searchFieldChange.bind(this);
   }
-  
+
   searchFieldChange (event) {
     this.setState({
       searchFieldValue: event.target.value
     });
   }
-  
+
   render () {  
     return (
       <div className="mb-3">
@@ -577,14 +577,14 @@ component (plus some more constructor boilerplate):
 class Homepage extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
-    
+
     this.searchValueEntered = this.searchValueEntered.bind(this);
   }
-  
+
   searchValueEntered (value) {
     this.setState({
       searchFieldValue: value
@@ -600,11 +600,11 @@ Now we've passed this down to to Search we can pick it up there and use it (not
 forgetting to set up a PropType for `searchValueEntered`):
 
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 
 ...
-  
+
   searchFieldChange (event) {
     this.setState({
       searchFieldValue: event.target.value
@@ -658,7 +658,7 @@ this.props.mpData.forEach((mp, index) => {
   if (!searchValue || fulltext.indexOf(searchValue) > -1) {
     let name = mp.name.split(',');
     name = name.reverse().join(' ');
-    
+
     rows.push(
       <tr key={index}>
       <td>{name}</td>
@@ -828,15 +828,15 @@ Create a new file, `src/components/row/row.jsx`, into which we'll set up a
 component and copy over some of the logic from Table:
 
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 
 class Row extends Component {
-  
+
   render () {  
     let name = this.props.mp.name.split(',');
     name = name.reverse().join(' ');
-    
+
     return (
       <tr>
         <td>{name}</td>
@@ -969,6 +969,167 @@ further up the chain, then we might have needed to use the
 event to re-render our component. That and
 [componentDidMount()](https://facebook.github.io/react/docs/react-component.html#componentdidmount)
 often end up sharing a lot of logic that you should abstract out.
+
+### Using an API to retrieve data
+
+Currently we are using some hard coded data to list our MP's, lets make some changes to get this from an API.
+
+We are going to use a library called [React Refetch](https://github.com/heroku/react-refetch) to help with calling an API that I have mocked using Postman.
+
+In the terminal, enter:
+
+```
+npm install --save react-refetch
+```
+
+We then need to import this library, at the top of `src/components/homepage/homepage.jsx` enter:
+
+```
+import { connect } from 'react-refetch';
+```
+We are going to refactor our homepage component so that it renders different components depending on the state of our API call. To do this we need to create a couple of new components, one to handle errors and one for successful calls.
+
+Create a new file `src/components/error/error.js` and create a component called `Error` that will take a object prop so we need to import PropTypes and add the validation, component should look like the below:
+
+```
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+class Error extends Component {
+  render () {
+    const cause = this.props.error.cause;
+
+    if(cause === undefined) {
+      return <h1>{this.props.error.toString()}</h1>;
+    }
+
+    return (
+      <div className="container-fluid">
+        <div className="row mb-3">
+          <div className="col">
+            <h1>Error</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <p>There was an error: {cause.detail}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+Error.propTypes = {
+  error: PropTypes.object
+};
+
+export default Error;
+```
+
+Create another new file `src/components/home/home.js` and create a component called `Home`, this new component will contain a lot of the logic that is currently in our Homepage component so we can copy and paste a lot of that logic.  The final component should look like the below:
+
+```
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ScrollToTop from 'react-scroll-up';
+
+import Search from 'components/search/search';
+import Table from 'components/table/table';
+
+class Home extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      searchFieldValue: ''
+    };
+
+    this.searchValueEntered = this.searchValueEntered.bind(this);
+  }
+
+  searchValueEntered (value) {
+    this.setState({
+      searchFieldValue: value
+    });
+  }
+
+  render () {
+    return (
+      <div className="container-fluid">
+        <div className="row mb-3">
+          <div className="col">
+            <h1>Contact your NZ MP</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Search searchValueEntered={this.searchValueEntered} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Table mpData={this.props.data.mps} searchFieldValue={this.state.searchFieldValue} />
+          </div>
+        </div>
+        <ScrollToTop showUnder={160}>
+          <button className="btn btn-primary">Back to top</button>
+        </ScrollToTop>
+      </div>
+    );
+  }
+}
+
+Home.propTypes = {
+  data: PropTypes.object
+};
+
+export default Home;
+```
+Note that in the above we are now passing in an object prop, we we needed to change the propType validation, we have also changed the data that is being passed to the mpData prop to use `this.props.data.mps`.
+
+Now lets work on change our Homepage component to call the API and render components appropriately.
+
+At the bottom of `src/components/homepage/homepage.jsx` we need to add a connect function to our export, this makes the GET request and assigns it to a prop `data`.
+When the component mounts, the request will be calculated, fetched and passed to the component as the prop `data`:
+
+```
+export default connect(() => ({
+  data: 'https://51d104d3-f066-4c11-b8bd-a317ef5e448a.mock.pstmn.io/mp-data'
+}))(Homepage);
+```
+
+As we are now passing a prop to our component we need to validate it using propTypes.
+Just above the export, enter:
+
+```
+Homepage.propTypes = {
+  data: PropTypes.object
+};
+```
+
+Now, in our render function we can add some logic to render some logic based on the status of the the above API call.
+
+```
+if (this.props.data.pending) {
+  return <div>Loading...</div>;
+} else if (this.props.data.rejected) {
+  return <Error error={this.props.data.reason}/>;
+} else if (this.props.data.fulfilled) {
+  return <Home data={this.props.data.value}/>;
+}
+````
+
+Don't forget to import your Error and Home components!
+
+```
+import Error from 'components/error/error';
+import Home from 'components/home/home';
+```
+
+Now, if we reload our app, we will see a loading div while the component is retrieving the data, and then (hopefully) our app will render and work exactly as before, by passing the value of the call to our new Home component, unless there is an error, in which case the error component will render.
+
+React Refetch provides a lot of extra functionality, that you can read about in the [docs](https://github.com/heroku/react-refetch).
 
 ## Further reading
 

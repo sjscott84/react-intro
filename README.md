@@ -989,7 +989,7 @@ import { connect } from 'react-refetch';
 ```
 We are going to refactor our homepage component so that it renders different components depending on the state of our API call. To do this we need to create a couple of new components, one to handle errors and one for successful calls.
 
-Create a new file `src/components/error/error.js` and create a component called `Error` that will take a object prop so we need to import PropTypes and add the validation, component should look like the below:
+Create a new file `src/components/error/error.js` and create an component called `Error` that will take an object prop so we need to import PropTypes and add the validation, component should look like the below:
 
 ```
 import React, { Component } from 'react';
@@ -1027,7 +1027,7 @@ Error.propTypes = {
 export default Error;
 ```
 
-Create another new file `src/components/home/home.js` and create a component called `Home`, this new component will contain a lot of the logic that is currently in our Homepage component so we can copy and paste a lot of that logic.  The final component should look like the below:
+Create another new file `src/components/home/home.js` and create an component called `Home`, this new component will contain a lot of the logic that is currently in our Homepage component so we can copy and paste a lot of that.  The final component should look like the below:
 
 ```
 import React, { Component } from 'react';
@@ -1086,12 +1086,12 @@ Home.propTypes = {
 
 export default Home;
 ```
-Note that in the above we are now passing in an object prop, we we needed to change the propType validation, we have also changed the data that is being passed to the mpData prop to use `this.props.data.mps`.
+Note that in the above we are now passing in an object prop, so we need to change the propTypes validation, we have also changed the data that is being passed to the  Table mpData prop to use `this.props.data.mps`, which is an array that will be returned from the API.
 
-Now lets work on change our Homepage component to call the API and render components appropriately.
+Now lets work on changing our Homepage component to call the API and render components appropriately.
 
-At the bottom of `src/components/homepage/homepage.jsx` we need to add a connect function to our export, this makes the GET request and assigns it to a prop `data`.
-When the component mounts, the request will be calculated, fetched and passed to the component as the prop `data`:
+At the bottom of `src/components/homepage/homepage.jsx` we need to add a connect function, imported from React Refetch to our export.
+When the component mounts, the request will be calculated (props can also be passed to the connect ), fetched and passed to the component as the prop `data`, React Refetch makes use of the React component life cycles to do this:
 
 ```
 export default connect(() => ({
@@ -1108,7 +1108,7 @@ Homepage.propTypes = {
 };
 ```
 
-Now, in our render function we can add some logic to render some logic based on the status of the the above API call.
+Now, in our render function we can add some logic to render components based on the status of the the above API call.
 
 ```
 if (this.props.data.pending) {

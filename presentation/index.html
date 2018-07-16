@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Reveal Presentation Template - Catalyst</title>
+
+        <meta name="author" content="Catalyst">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/catalyst.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+        <link rel="stylesheet" href="lib/css/catalyst-syntax.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <style>
+            /* Add the ability to omit slides from the printed version (has to be after the print include)*/
+            @media print {
+                .reveal .slides section.no-print {
+                    display: none !important;
+                    visibility: hidden !important;
+                }
+            }
+        </style>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Please put any custom styles here -->
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+              <!-- Cover slide -->
+              <section>
+                  <h3>React Introduction</h3>
+                  <h1 class="catalyst-logo">Catalyst</h1>
+                  <p class="small-text">
+                      Presented by <a href="#">Sarah Scott</a>
+                  </p>
+              </section>
+
+              <section>
+                <h3>Admin</h3>
+                <ul>
+                  <li>Bathrooms</li>
+                  <li>Emergency Procedure</li>
+                  <li>Breaks</li>
+                  <li>Course structure</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>Why React?</h3>
+                <ul>
+                  <li class="fragment">It's incredibly popular</li>
+                  <li class="fragment">There is a large developer community</li>
+                  <li class="fragment">You can transition to native mobile apps with only a
+                  small learning curve</li>
+                  <li class="fragment">The performance is pretty good</li>
+                  <li class="fragment">Development is backed by a company with deep pockets</li>
+                </ul>
+              </section>
+
+              <section class="image-slide">
+                <h3>What is React?</h3>
+                <ul>
+                  <li class="fragment">It is a JavaScript views library - not a framework</li>
+                  <li class="fragment">Allows us to create reuseable user interface components</li>
+                  <li class="fragment">We bolt other libraries onto React to provide more functionality</li>
+                </ul>
+              </section>
+
+              <section class="image-slide">
+                <h3>Common stack</h3>
+                <ul>
+                  <li>ES6 (JavaScript)</li>
+                  <li>React</li>
+                  <li>React Router</li>
+                  <li>Redux</li>
+                  <li>Thunk</li>
+                  <li>Jest</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>Components</h3>
+                <p>Components let you split the UI into independent, reusable pieces,
+                  and think about each piece in isolation.</br></br>
+                  Conceptually, components are like JavaScript functions. They accept
+                  arbitrary inputs (called “props”) and return React elements describing
+                  what should appear on the screen.</p>
+                <small>reactjs.org</small>
+              </section>
+
+              <section>
+                <img src="img/component.png" />
+              </section>
+
+              <section>
+                <h3>Our app - Component Structure</h3>
+                <img src="img/component-structure.png" />
+              </section>
+
+              <section>
+                <h4>Props</h4>
+                <p>Props are how components talk to each other</p>
+                <p>Props are passed from a parent component to a child component and are immutable</p>
+
+                <h4>State</h4>
+                <p>State is managed within the component and unlike props, is mutable<p>
+
+                <i>We will go into more detail about both props and state as we build our application</i>
+              </section>
+
+              <section>
+                <h3>Other things of note...</h3>
+              </section>
+
+              <section>
+                <h3>ES6</h3>
+                <ul>
+                  <li class="fragment">Instead of <code>var</code> we use <code>let</code> and <code>const</code></li>
+                  <li class="fragment">Functions written as arrow functions
+                  <pre><code data-trim contenteditable>
+                    (param1, param2) => {
+                      // body of function goes here
+                    }
+                  </code></pre></li>
+                  <li class="fragment">We can import from other files using modules</li>
+                  <li class="fragment">Classes are easy to create</li>
+                </ul>
+              </section>
+
+              <section>
+                <h3>JSX</h3>
+                <p>JSX is a syntax extendion to JavaScript and is the recommended way to
+                describe what the UI should look like in React</p>
+                <ul>
+                  <li class="fragment">Allows us to combine our logic and markup in one file</li>
+                  <li class="fragment">Embed JavaScript expressions with curly braces ({})</li>
+                  <li class="fragment">Since JSX is closer to JavaScript then html we use the camelCase
+                  naming convention, for example <code>className</code> instead of <code>class</code></li>
+
+                </ul>
+              </section>
+
+              <section>
+                <h3>Linux and the Terminal</h3>
+                <p>We are using Linux machines today, and will use the terminal to initialize our application.</p>
+                <p>Don't worry if you are not familar with either, as you can follow along with me,
+                and neither is fundamental to learning React</p>
+              </section>
+
+              <section>
+                <h3>Lets build something!</h3>
+              </section>
+
+              <!-- Slide with Catalyst slogan -->
+              <section class="image-slide">
+                <img class="cat-slogan-image" src="css/theme/images/freedom-to-innovate.svg" alt="freedom to innovate">
+              </section>
+            </div>
+
+            <div class="footer">
+                <div class="scarf">
+                    <div class="scarf-orange"></div>
+                    <div class="scarf-yellow"></div>
+                    <div class="scarf-blue"></div>
+                    <div class="scarf-green"></div>
+                </div>
+                <div class="footer-inner">
+                    <div class="catalyst-logo-footer">Catalyst</div>
+                    <!-- NOTE: use only one of these. open-source-technologists is the standard -->
+                    <div class="open-source-technologists">open source technologists</div>
+                    <!-- <div class="freedom-to-innovate">freedom to innovate</div> -->
+                </div>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        <script src="js/footer.js"></script>
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

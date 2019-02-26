@@ -81,8 +81,7 @@ npm install --save-dev react react-dom
 ```
 
 I also set up a [Webpack](https://webpack.github.io/) based development build
-process. If you'd like to learn more about how that works, I run a
-JavaScript Build Pipelines training.
+process. This process is not covered as part of this course.
 
 If you want to refer to a finished, working version of today's project, have a
 look at the `example` folder.
@@ -247,7 +246,7 @@ is complaining at us for not having it).
 First, in a terminal in the `tutorial` directory, run:
 
 ```
-npm install --save-dev prop-types
+npm install --save prop-types
 ```
 
 Change:
@@ -700,7 +699,7 @@ Router](https://reacttraining.com/react-router/web/guides/quick-start).
 First, as we're adding a project dependency we need to install it:
 
 ```
-npm install --save-dev react-router-dom
+npm install --save react-router-dom
 ```
 
 Then, let's make a functional component for our About page at `src/components/about/about.jsx`:
@@ -790,7 +789,7 @@ integrate. For example,
 flaoting back to top button, can be installed by:
 
 ```
-npm install --save-dev react-scroll-up
+npm install --save react-scroll-up
 ```
 
 and then used very easily, for example here in
@@ -822,7 +821,7 @@ Hopefully the library you want to use supports being included as a module and
 can be added as an npm dep - Clipboard.js does and can:
 
 ```
-npm install clipboard --save-dev
+npm install clipboard --save
 ```
 
 To use it, we want to add one per row. This is a good time to break up our Table

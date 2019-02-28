@@ -41,7 +41,7 @@ on a terminal or command line interface (assuming that your machine already has
 [git available](https://git-scm.com/downloads)):
 
 ```
-git clone https://github.com/jenofdoom/react-intro.git
+git clone https://github.com/sjscott84/react-intro.git
 cd react-intro
 ```
 
@@ -49,7 +49,7 @@ cd react-intro
 
 First, we need to install [node.js](https://nodejs.org/) and its package manager, npm.
 
-[Ubuntu/Debian/Mint instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
+[Ubuntu/Debian/Mint instructions](https://github.com/nodesource/distributions/blob/master/README.md)
 
 [Mac instructions](http://blog.teamtreehouse.com/install-node-js-npm-mac)
 

@@ -35,7 +35,7 @@ displays a searchable list of MP's in New Zealand, and their email addresses.
 
 ## Getting started
 
-If you have your own github account already, you might prefer to fork this
+If you have your own github account already, you  might prefer to fork this
 repository and clone that instead. If you don't just run the following commands
 on a terminal or command line interface (assuming that your machine already has
 [git available](https://git-scm.com/downloads)):
@@ -179,8 +179,8 @@ going to add the basic HTML (JSX!) structure for the new component:
 
 React provides us two ways to create components, as functions or as classes, we
 will be using both throughout this course. From Reacts perspective both types of
-components are equivalant, except that Classes have extra functionality, like
-state (more on that soon), that is not avalible in a functional component.
+components are equivalent, except that Classes have extra functionality, like
+state (more on that soon), that is not available in a functional component.
 
 React have recently added hooks, providing us a way to use some the Class functionality
 inside out functional components.  Hooks are outside the scope of this course but
@@ -191,7 +191,7 @@ Our first component is going to be a functional component as it does not need st
 ```
 import React from 'react';
 
-function Table() {
+function Table(props) {
   return (
     <table className="table">
       <thead>
@@ -251,12 +251,12 @@ npm install --save prop-types
 
 Change:
 ```
-import React, { Component } from 'react';
+import React from 'react';
 ```
 
 to:
 ```
-import React, { Component, } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 ```
 
@@ -702,7 +702,9 @@ First, as we're adding a project dependency we need to install it:
 npm install --save react-router-dom
 ```
 
-Then, let's make a functional component for our About page at `src/components/about/about.jsx`:
+Then, let's make a functional component for our About page at `src/components/about/about.jsx`,
+notice that we do not need to pass `props` as an argument as we will not be using any props
+in this component:
 
 ```
 import React from 'react';

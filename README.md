@@ -33,7 +33,7 @@ A common stack is:
 Today we'll be covering the first three of those, by building a simple app which
 displays a searchable list of MP's in New Zealand, and their email addresses.
 
-## Getting started 
+## Getting started
 
 If you have your own github account already, you might prefer to fork this
 repository and clone that instead. If you don't just run the following commands
@@ -149,7 +149,7 @@ import data from 'data';
 We can check that's working as we expect by adding a `console.log(data);`
 statement temporarily.
 
-We also want to import the new component that we're adding, for the table. 
+We also want to import the new component that we're adding, for the table.
 
 > It's a good idea to only have one component per file, so we should create a new file.
 
@@ -176,26 +176,37 @@ yet.
 Create a new file, `src/components/table/table.jsx`. In the new file, we're
 going to add the basic HTML (JSX!) structure for the new component:
 
-```
-import React, { Component } from 'react';
+## Functional components vs. Class components
 
-class Table extends Component {
-  render () {
-    return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Party</th>
-            <th>Electorate</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    );
-  }
+React provides us two ways to create components, as functions or as classes, we
+will be using both throughout this course. From Reacts perspective both types of
+components are equivalant, except that Classes have extra functionality, like
+state (more on that soon), that is not avalible in a functional component.
+
+React have recently added hooks, providing us a way to use some the Class functionality
+inside out functional components.  Hooks are outside the scope of this course but
+you can read about them [here](https://reactjs.org/docs/hooks-intro.html).
+
+Our first component is going to be a functional component as it does not need state.
+
+```
+import React from 'react';
+
+function Table() {
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Electorate</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  );
 }
 
 export default Table;
@@ -226,7 +237,7 @@ structure more easily.
 ### PropTypes
 
 React comes with a rudimentary type checking system that is good to use, called
-[PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html). 
+[PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html).
 
 PropTypes are added to every component and they validate that __props__ that are
 being passed in conform to a particular _type_ (like, a string, or an array).
@@ -246,7 +257,7 @@ import React, { Component } from 'react';
 
 to:
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 ```
 
@@ -266,16 +277,14 @@ each MP as a new row of the table.
 Rendering variables into JSX is really easy, let's temporarily try it now:
 
 ```
-render () {
-  
-  let test = 'MP';
-  
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>{test} Name</th>
-          <th>Party</th>
+let test = 'MP';
+
+return (
+  <table className="table">
+    <thead>
+      <tr>
+        <th>{test} Name</th>
+        <th>Party</th>
 ```
 
 You can get rid of that, but it shows how you can directly use variables and
@@ -285,21 +294,20 @@ We don't want to have to manually output every row of data though, we want to
 use a loop:
 
 ```
-render () {
-  let rows = [];
-  
-  this.props.mpData.forEach(mp => {
-    rows.push(
-      <tr>
-        <td>{mp.name}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    );
-  });
-  
-  return (
+let rows = [];
+
+props.mpData.forEach(mp => {
+  rows.push(
+    <tr>
+      <td>{mp.name}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  );
+});
+
+return (
 ```
 
 ```
@@ -311,9 +319,9 @@ render () {
 ### Props
 
 We used a special variable reference to get the data that was passed in from the
-Homepage component: `this.props`. All the data passed in (the __props__) are
-immutable: you _cannot_ change their value within the component. By passing data
-in as a prop, you are indicating that the parent component owns it rather than
+Homepage component: `props` (or `this.props` within a Class). All the data passed
+in (the __props__) are immutable: you _cannot_ change their value within the component.
+By passing data in as a prop, you are indicating that the parent component owns it rather than
 this component. There is a different type of special value that _is_ mutable and
 specific to the current component, __state__, which we'll look at more soon.
 
@@ -324,7 +332,7 @@ of elements need unique keys. We can fix that by using an index parameter on our
 `forEach` loop:
 
 ```
-this.props.mpData.forEach((mp, index) => {
+props.mpData.forEach((mp, index) => {
   rows.push(
     <tr key={index}>
       <td>{mp.name}</td>
@@ -335,10 +343,10 @@ this.props.mpData.forEach((mp, index) => {
 We can use normal JS to perform transformations on the data.
 
 ```
-this.props.mpData.forEach((mp, index) => {
+props.mpData.forEach((mp, index) => {
   let name = mp.name.split(',');
   name = name.reverse().join(' ');
-  
+
   rows.push(  
     <tr key={index}>
       <td>{name}</td>
@@ -353,10 +361,10 @@ this.props.mpData.forEach((mp, index) => {
 ### Adding the rest of the columns
 
 ```
-this.props.mpData.forEach(mp => {
+props.mpData.forEach(mp => {
   let name = mp.name.split(',');
   name = name.reverse().join(' ');
-  
+
   rows.push(  
     <tr key={mp.email}>
       <td>{name}</td>
@@ -374,38 +382,37 @@ Our render method is getting a bit long and unruly: let's refactor it a bit.
 We're going to change the current code:
 
 ```
-class Table extends Component {
-  render () {
-    let rows = [];
-    
-    this.props.mpData.forEach((mp, index) => {
-      let name = mp.name.split(',');
-      name = name.reverse().join(' ');
-      
-      rows.push(  
-        <tr key={index}>
-          <td>{name}</td>
-          <td>{mp.party}</td>
-          <td>{mp.electorate}</td>
-          <td><a href={'mailto:' + mp.email}>{mp.email}</a></td>
-        </tr>
-      );
-    });
-    
-    return (
+function Table(props) {
+  let rows = [];
+
+  props.mpData.forEach((mp, index) => {
+    let name = mp.name.split(',');
+    name = name.reverse().join(' ');
+
+    rows.push(  
+      <tr key={index}>
+        <td>{name}</td>
+        <td>{mp.party}</td>
+        <td>{mp.electorate}</td>
+        <td><a href={'mailto:' + mp.email}>{mp.email}</a></td>
+      </tr>
+    );
+  });
+
+  return (
 ```
 
 to:
 
 ```
-class Table extends Component {
-  renderRows () {
+function Table(props) {
+  function renderRows () {
     let rows = [];
-    
-    this.props.mpData.forEach((mp, index) => {
+
+    props.mpData.forEach((mp, index) => {
       let name = mp.name.split(',');
       name = name.reverse().join(' ');
-      
+
       rows.push(  
         <tr key={index}>
           <td>{name}</td>
@@ -415,14 +422,13 @@ class Table extends Component {
         </tr>
       );
     });
-    
+
     return rows;
   }
-  
-  render () {
-    const rows = this.renderRows();
-    
-    return (
+
+  const rows = renderRows();
+
+  return (
 ```
 
 ## Searching the table
@@ -437,11 +443,11 @@ class Search extends Component {
     return (
       <div className="mb-3">
         <label>
-          Search: 
+          Search:
           <input
             className="ml-2"
             type="search"
-            autoComplete="off" 
+            autoComplete="off"
           />
         </label>
       </div>
@@ -492,12 +498,12 @@ import React, { Component } from 'react';
 class Search extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
   }
-  
+
   render () {  
     return (
       <div className="mb-3">
@@ -514,7 +520,7 @@ class Search extends Component {
 
 The `constructor (props) { super(props)` bit is boilerplate for adding a
 constructor to a class.
-  
+
 Now we need to set up a trigger so as the user interacts
 with the field their input values are reflected in the state:
 
@@ -522,20 +528,20 @@ with the field their input values are reflected in the state:
 class Search extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
 
     this.searchFieldChange = this.searchFieldChange.bind(this);
   }
-  
+
   searchFieldChange (event) {
     this.setState({
       searchFieldValue: event.target.value
     });
   }
-  
+
   render () {  
     return (
       <div className="mb-3">
@@ -577,14 +583,14 @@ component (plus some more constructor boilerplate):
 class Homepage extends Component {
   constructor (props) {
     super(props);
-    
+
     this.state = {
       searchFieldValue: ''
     };
-    
+
     this.searchValueEntered = this.searchValueEntered.bind(this);
   }
-  
+
   searchValueEntered (value) {
     this.setState({
       searchFieldValue: value
@@ -600,11 +606,11 @@ Now we've passed this down to to Search we can pick it up there and use it (not
 forgetting to set up a PropType for `searchValueEntered`):
 
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 
 ...
-  
+
   searchFieldChange (event) {
     this.setState({
       searchFieldValue: event.target.value
@@ -651,14 +657,14 @@ value is contained in it, and then only push our row of data if 1) there was no
 search string supplied or 2) the row does contain the search value.
 
 ```
-this.props.mpData.forEach((mp, index) => {
+props.mpData.forEach((mp, index) => {
   const fulltext = Object.values(mp).join().toLowerCase();
-  const searchValue = this.props.searchFieldValue.toLowerCase();
+  const searchValue = props.searchFieldValue.toLowerCase();
 
   if (!searchValue || fulltext.indexOf(searchValue) > -1) {
     let name = mp.name.split(',');
     name = name.reverse().join(' ');
-    
+
     rows.push(
       <tr key={index}>
       <td>{name}</td>
@@ -697,28 +703,26 @@ First, as we're adding a project dependency we need to install it:
 npm install --save-dev react-router-dom
 ```
 
-First, let's make a component for our About page at `src/components/about/about.jsx`:
+Then, let's make a functional component for our About page at `src/components/about/about.jsx`:
 
 ```
-import React, { Component } from 'react';
+import React from 'react';
 
-class About extends Component {
-  render () {  
-    return (
-      <div className="container-fluid">
-        <div className="row mb-3">
-          <div className="col">
-            <h1>About</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <p>Get the most up to date details at <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/</a></p>
-          </div>
+function About() {
+  return (
+    <div className="container-fluid">
+      <div className="row mb-3">
+        <div className="col">
+          <h1>About</h1>
         </div>
       </div>
-    );
-  }
+      <div className="row">
+        <div className="col">
+          <p>Get the most up to date details at <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/</a></p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default About;
@@ -825,18 +829,18 @@ To use it, we want to add one per row. This is a good time to break up our Table
 component up further.
 
 Create a new file, `src/components/row/row.jsx`, into which we'll set up a
-component and copy over some of the logic from Table:
+Class component and copy over some of the logic from Table:
 
 ```
-import React, { Component, } from 'react'; 
+import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 
 class Row extends Component {
-  
+
   render () {  
     let name = this.props.mp.name.split(',');
     name = name.reverse().join(' ');
-    
+
     return (
       <tr>
         <td>{name}</td>

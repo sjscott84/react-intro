@@ -1,22 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class About extends Component {
-  render () {  
-    return (
-      <div className="container-fluid">
-        <div className="row mb-3">
-          <div className="col">
-            <h1>About</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <p>Get the most up to date details at <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/</a></p>
-          </div>
+function About() {
+  return (
+    <div className="container-fluid">
+      <div className="row mb-3">
+        <div className="col">
+          <h1>About</h1>
         </div>
       </div>
-    );
-  }
+      <div className="row">
+        <div className="col">
+          <p>Get the most up to date details at <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/</a></p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
+// class About extends Component {
+//   render () {
+//     return (
+//       <div className="container-fluid">
+//         <div className="row mb-3">
+//           <div className="col">
+//             <h1>About</h1>
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col">
+//             <p>Get the most up to date details at <a href="https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/">https://www.parliament.nz/en/get-involved/have-your-say/contact-an-mp/</a></p>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+//
 export default About;

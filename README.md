@@ -377,7 +377,7 @@ props.mpData.forEach(mp => {
 
 ### Calling methods on the class
 
-Our render method is getting a bit long and unruly: let's refactor it a bit.
+Our functional component is getting a bit long and unruly: let's refactor it a bit.
 We're going to change the current code:
 
 ```
@@ -429,6 +429,9 @@ function Table(props) {
 
   return (
 ```
+
+And of course our new `renderRows` function does not need to be inside our functional
+component, and could be another piece of reusable functionality.
 
 ## Searching the table
 
